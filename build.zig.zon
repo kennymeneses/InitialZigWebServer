@@ -51,6 +51,11 @@
         //    // actually used.
         //    .lazy = false,
         //},
+        // zap v0.8.0
+        .zap = .{
+            .url = "https://github.com/zigzap/zap/archive/v0.8.0.tar.gz",
+            .hash = "12209936c3333b53b53edcf453b1670babb9ae8c2197b1ca627c01e72670e20c1a21",
+        },
     },
 
     // Specifies the set of files and directories that are included in this package.
