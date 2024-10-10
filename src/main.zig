@@ -1,9 +1,7 @@
 const std = @import("std");
 const zap = @import("zap");
 const print = std.debug.print;
-const UserEndpoints = @import("api/userendpoints.zig");
 const customRouter = @import("api/router.zig");
-
 
 pub fn main() !void {
 
