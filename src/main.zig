@@ -44,32 +44,6 @@ pub fn main() !void {
     std.log.debug("Has leaked: {}\n", .{has_leaked});
 }
 
-
-fn static_site(r: zap.Request) void {
-    r.sendBody("<html><body><h1>Hello from STATIC ZAP!</h1></body></html>") catch return;
-}
-
-var dynamic_counter: i32 = 0;
-fn dynamic_site(r: zap.Request) void {
-    dynamic_counter += 1;
-    var buf: [128]u8 = undefined;
-    const filled_buf = std.fmt.bufPrintZ(
-        &buf,
-        "<html><body><h1>Hello # {d} from DYNAMIC ZAPPP!!!</h1></body></html>",
-        .{dynamic_counter},
-    ) catch "ERROR";
-    r.sendBody(filled_buf) catch return;
-}
-
-fn setup_routes(a: std.mem.Allocator) !void {
-    routes = std.StringHashMap(zap.HttpRequestFn).init(a);
-    try routes.put("/static", static_site);
-    try routes.put("/dynamic", dynamic_site);
-}
-
-var routes: std.StringHashMap(zap.HttpRequestFn) = undefined;
-
-
 pub fn Print(comptime message: []const u8, value: anytype) void {
     if (@TypeOf(value) == ?i32) {
         print("{s} {?}\n", .{ message, value });
